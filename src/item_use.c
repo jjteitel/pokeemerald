@@ -25,6 +25,7 @@
 #include "menu.h"
 #include "menu_helpers.h"
 #include "metatile_behavior.h"
+#include "nuzlocke.h"
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
