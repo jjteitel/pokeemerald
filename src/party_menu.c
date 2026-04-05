@@ -4403,9 +4403,11 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
 
     if (NuzlockeIsReviveItem(item))
     {
+        CopyItemName(item, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_NuzlockeCannotRevive);
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_NuzlockeCannotRevive, TRUE);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
         return;
@@ -5161,9 +5163,11 @@ void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task)
 {
     if (NuzlockeIsReviveItem(gSpecialVar_ItemId))
     {
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_NuzlockeCannotRevive);
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
-        DisplayPartyMenuMessage(gText_NuzlockeCannotRevive, TRUE);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
         return;

@@ -6,7 +6,7 @@
 #include "nuzlocke.h"
 #include "constants/items.h"
 
-const u8 gText_NuzlockeCannotRevive[] = _("This item can't be used during Nuzlocke.{PAUSE_UNTIL_PRESS}");
+const u8 gText_NuzlockeCannotRevive[] = _("{STR_VAR_1} can't be used during Nuzlocke.{PAUSE_UNTIL_PRESS}");
 
 bool8 NuzlockeIsReviveItem(u16 itemId)
 {
