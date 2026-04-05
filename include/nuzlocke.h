@@ -10,5 +10,6 @@
 extern const u8 gText_NuzlockeCannotRevive[];
 
 bool8 NuzlockeIsReviveItem(u16 itemId);
+bool8 NuzlockeIsMonDead(struct Pokemon *mon);
 
 #endif // GUARD_NUZLOCKE_H
