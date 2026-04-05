@@ -72,6 +72,7 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "nuzlocke.h"
 
 enum {
     MENU_SUMMARY,
@@ -4400,6 +4401,18 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal, cannotUse;
 
+    if (NuzlockeIsReviveItem(item))
+    {
+        CopyItemName(item, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_NuzlockeCannotRevive);
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+        return;
+    }
+
     if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
     {
         cannotUse = TRUE;
@@ -5148,6 +5161,17 @@ static void BufferMonStatsToTaskData(struct Pokemon *mon, s16 *data)
 
 void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task)
 {
+    if (NuzlockeIsReviveItem(gSpecialVar_ItemId))
+    {
+        CopyItemName(gSpecialVar_ItemId, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_NuzlockeCannotRevive);
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+        return;
+    }
     sPartyMenuInternal->tUsedOnSlot = FALSE;
     sPartyMenuInternal->tHadEffect = FALSE;
     sPartyMenuInternal->tLastSlotUsed = gPartyMenu.slotId;
